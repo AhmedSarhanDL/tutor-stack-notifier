@@ -39,4 +39,41 @@ target-version = ['py311']
 [tool.isort]
 profile = "black"
 multi_line_output = 3
-line_length = 100 
+line_length = 100
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --cov=tutor_stack_notifier --cov-report=term-missing"
+filterwarnings = [
+    "ignore::PendingDeprecationWarning:starlette.*"
+]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+exclude = [
+    "venv",
+    ".venv",
+    ".mypy_cache",
+    "__pycache__"
+]
+
+[tool.coverage.run]
+source = ["tutor_stack_notifier"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+] 
