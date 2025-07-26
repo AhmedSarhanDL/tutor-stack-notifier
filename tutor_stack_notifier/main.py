@@ -12,3 +12,8 @@ class Notification(BaseModel):
 async def notify(n: Notification):
     # Dummy notification logic
     return {"status": "sent", "message": n.message}
+
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
